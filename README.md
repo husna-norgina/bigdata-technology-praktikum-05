@@ -97,7 +97,7 @@ bigdata-project/
 ├── reports/
 ├── scripts/
 │   ├── analytics_layer.py
-|   ├── batch_pipeline_enterprise.py
+│   ├── batch_pipeline_enterprise.py
 │   └── visualization_layer.py
 │
 ├── evidence/
@@ -215,24 +215,23 @@ Dashboard ini membantu **pengambil keputusan bisnis memahami performa penjualan 
 
 Berikut dokumentasi hasil praktikum.
 
-### 1️⃣ Analytics Layer Execution
+---
 
-Menampilkan proses eksekusi:
+### 1️⃣ Dashboard Power BI
 
-```
-python scripts/analytics_layer.py
-```
+![Dashboard Power BI](evidence/1.%20Screenshot%20dashboard%20Power%20BI.png)
 
-Menampilkan:
+Menampilkan dashboard **E-Commerce Sales Dashboard** yang berisi:
 
-* Total records
-* Total revenue
-* Top products
-* Revenue per category
+* KPI **Total Revenue**
+* **Top Products Chart**
+* **Revenue per Category Chart**
 
 ---
 
 ### 2️⃣ Dataset Serving Layer
+
+![Serving Dataset](evidence/2.%20Screenshot%20folder%20serving%20dataset%20data_serving.png)
 
 Screenshot folder:
 
@@ -240,29 +239,68 @@ Screenshot folder:
 data/serving
 ```
 
-Menunjukkan dataset yang siap digunakan oleh Power BI.
+Menunjukkan dataset hasil **Analytics Layer** yang siap digunakan oleh Power BI.
 
 ---
 
-### 3️⃣ Dashboard Power BI
+### 3️⃣ Analytics Layer Execution
 
-Menampilkan dashboard:
+Menampilkan proses eksekusi script:
 
 ```
-E-Commerce Sales Dashboard
+python scripts/analytics_layer.py
 ```
 
-Dashboard berisi:
+#### Screenshot 1
 
-* KPI Total Revenue
-* Top Products Chart
-* Revenue per Category Chart
+![Terminal 1](evidence/3.%20Screenshot%20terminal%20saat%20menjalankan%20python%20scripts1.png)
+
+#### Screenshot 2
+
+![Terminal 2](evidence/4.%20Screenshot%20terminal%20saat%20menjalankan%20python%20scripts2.png)
+
+#### Screenshot 3
+
+![Terminal 3](evidence/5.%20Screenshot%20terminal%20saat%20menjalankan%20python%20scripts3.png)
+
+Menampilkan:
+
+* Total records
+* Total revenue
+* Top products
+* Revenue per category
+* Status eksekusi pipeline
 
 ---
 
-# 📄 Laporan Praktikum 3
+### 4️⃣ Visualisasi dengan Pandas + Matplotlib
 
-📎 `230104040056_Husna Norgina_P3.pdf`
+![Visualization](evidence/6.%20Screenshot%20scripts%20Visualisasi%20dengan%20Pandas%20+%20Matplotlib.png)
+
+Menampilkan proses pembuatan visualisasi menggunakan **Pandas dan Matplotlib**.
+
+---
+
+## 📄 Laporan Praktikum 3
+
+📎 [230104040056_Husna Norgina_P3.pdf](evidence/230104040056_Husna%20Norgina_P3.pdf)
+
+Isi laporan meliputi:
+
+* Tujuan praktikum
+* Konteks industri Big Data
+* Arsitektur pipeline data
+* Output hasil praktikum
+* Analisis
+* Kesimpulan
+
+---
+
+## 🗃 File Dashboard Power BI
+
+📎 [bigdata_dashboard.pbix](evidence/bigdata_dashboard.pbix)
+
+File ini berisi dashboard **E-Commerce Sales Dashboard** yang digunakan untuk menampilkan hasil analisis data secara visual.
 
 ---
 
