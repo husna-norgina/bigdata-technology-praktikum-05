@@ -1,21 +1,14 @@
-# 🚀 Praktikum 2 — Batch Data Ingestion & Processing with Spark
+# 🚀 Praktikum 3 — Batch Analytics & Visualization with Spark + Power BI
 
-**Enterprise Edition (WSL + VS Code + Data Lake + Partitioning)**
+**Enterprise Edition (WSL + VS Code + Spark + Business Intelligence Dashboard)**
 
-Praktikum ini membahas implementasi **Enterprise Batch Data Pipeline** menggunakan **Apache Spark (PySpark)** dalam lingkungan **Linux (WSL)** dengan pendekatan **Medallion Architecture (Raw – Clean – Curated)**.
+Praktikum ini membahas implementasi **Analytics Layer dan Visualization Layer** pada arsitektur **Big Data Pipeline** menggunakan **Apache Spark (PySpark)** serta visualisasi data menggunakan **Microsoft Power BI**.
 
-Fokus utama praktikum adalah membangun pipeline data yang:
+Pipeline data pada praktikum ini melanjutkan proses dari **Batch Processing Pipeline (Praktikum 2)** dan menghasilkan dataset analitik yang siap digunakan untuk **Business Intelligence Dashboard**.
 
-* Production-ready
-* Menggunakan explicit schema
-* Mengimplementasikan data cleaning & transformation
-* Menggunakan format columnar (Parquet)
-* Menerapkan partitioning strategy
-* Menghasilkan insight bisnis sederhana
+Praktikum ini mensimulasikan workflow **Data Engineering → Business Intelligence** pada industri modern.
 
-Praktikum ini mensimulasikan workflow industri e-commerce dalam memproses data transaksi skala besar.
-
-**Topik:** Batch Processing, Distributed Computing, Data Lake, Parquet, Partition Pruning, Medallion Architecture, PySpark
+**Topik:** Analytics Layer, KPI Generation, Serving Layer, Business Intelligence, Dashboard Visualization, PySpark, Power BI
 
 ---
 
@@ -25,223 +18,282 @@ Praktikum ini mensimulasikan workflow industri e-commerce dalam memproses data t
 | ----------------- | ---------------------------------------------------------------- |
 | Mata Kuliah       | Teknologi Big Data                                               |
 | Dosen Pengampu    | Muhayat, M.IT                                                    |
-| Praktikum         | Batch Data Ingestion & Processing with Spark                     |
+| Praktikum         | Batch Data Analytics + Visualization Layer                       |
 | Nama Mahasiswa    | Husna Norgina                                                    |
 | NIM               | 230104040056                                                     |
 | Kelas             | TI23B                                                            |
-| Repo GitHub       | https://github.com/husna-norgina/bigdata-technology-praktikum-02 |
-| Tanggal Praktikum | 26-02-2026                                                       |
+| Repo GitHub       | https://github.com/husna-norgina/bigdata-technology-praktikum-03 |
+| Tanggal Praktikum | 05-03-2026                                                       |
 
 ---
 
-## 🎯 Tujuan Praktikum
+# 🎯 Tujuan Praktikum
 
-1. Menggunakan Linux environment (WSL) untuk data engineering
-2. Mengintegrasikan VS Code dengan WSL
-3. Mengelola virtual environment Python
-4. Mengimplementasikan batch data ingestion dengan Spark
-5. Menerapkan data cleaning & transformation
-6. Mendesain struktur Data Lake (Raw, Clean, Curated)
-7. Menggunakan format Parquet
-8. Menerapkan partitioning strategy
-9. Menghasilkan pipeline enterprise-ready
+1. Memahami peran **Analytics Layer dalam Big Data Pipeline**
+2. Menghasilkan **KPI bisnis menggunakan Apache Spark**
+3. Membuat **Serving Layer dataset untuk BI tools**
+4. Menghubungkan dataset Spark ke **Power BI**
+5. Membuat **dashboard analitik sederhana**
+6. Menyajikan insight bisnis dari data transaksi e-commerce
+
+Tujuan utama praktikum ini adalah memahami bagaimana **data engineer menyediakan dataset untuk kebutuhan analisis bisnis dan dashboard eksekutif**.
 
 ---
 
-## 🏛 Arsitektur Pipeline
+# 🏛 Arsitektur Pipeline
+
+Pipeline pada praktikum ini adalah:
 
 ```
-CSV Source
-   ↓
-Raw Layer
-   ↓
-Cleaning & Validation
-   ↓
-Transformation
-   ↓
-Clean Layer (Parquet)
-   ↓
-Curated Layer (Aggregation)
-   ↓
-Partitioned Data Lake
+Raw Dataset (CSV)
+       ↓
+Spark Processing
+       ↓
+Clean Data (Parquet)
+       ↓
+Analytics Layer
+       ↓
+Serving Layer (CSV)
+       ↓
+Power BI Dashboard
 ```
 
-Konsep utama yang digunakan:
-
-* Batch Processing
-* Distributed Computing
-* Medallion Architecture
-* Columnar Storage (Parquet)
-* Partition Pruning
+Pipeline ini menggambarkan **end-to-end Big Data Architecture** dari data mentah hingga dashboard bisnis. 
 
 ---
 
-## 🛠 Tools & Environment
+# 🛠 Tools & Environment
+
+Tools yang digunakan dalam praktikum ini:
 
 * Ubuntu (WSL – Linux Server Environment)
 * Visual Studio Code (Remote WSL)
 * Python 3
 * PySpark
 * Bash CLI
+* Microsoft Power BI Desktop
 * Git & GitHub
+
+Tools tersebut mencerminkan **stack teknologi modern dalam Data Engineering dan Business Intelligence**.
 
 ---
 
-## 🧱 Struktur Project
+# 🧱 Struktur Project
 
 ```
 bigdata-project/
 │
 ├── data/
-│   ├── raw/
 │   ├── clean/
-│   │   ├── parquet/
-│   │   └── partitioned_by_category/
-│   └── curated/
-│       ├── category_revenue/
+│   │   └── parquet/
+│   │
+│   └── serving/
+│       ├── total_revenue/
 │       ├── top_products/
+│       ├── category_revenue/
 │       └── avg_transaction/
 │
 ├── logs/
+├── reports/
 ├── scripts/
-│   └── batch_pipeline_enterprise.py
+│   ├── analytics_layer.py
+|   ├── batch_pipeline_enterprise.py
+│   └── visualization_layer.py
 │
 ├── evidence/
 ├── README.md
 ```
 
-Struktur ini mengikuti standar modern **Data Engineering & Data Lake Architecture**.
+Struktur ini mencerminkan arsitektur **Analytics Layer dan Serving Layer dalam Data Engineering pipeline**.
 
 ---
 
-## 🔥 Implementasi Enterprise Pipeline
+# 🔥 Implementasi Analytics Layer
 
-Pipeline dibangun menggunakan:
+Analytics Layer dibuat menggunakan **Apache Spark (PySpark)**.
+
+Inisialisasi Spark:
 
 ```python
 SparkSession.builder \
-    .appName("EnterpriseBatchPipelineDemo") \
+    .appName("AnalyticsLayer") \
     .master("local[*]") \
     .getOrCreate()
 ```
 
-Tahapan utama:
+Dataset yang digunakan berasal dari:
 
-### 1️⃣ Data Ingestion
+```
+data/clean/parquet
+```
 
-* Load dataset `ecommerce_raw.csv`
-* Menggunakan explicit schema (production best practice)
-
-### 2️⃣ Data Cleaning
-
-* dropDuplicates()
-* dropna()
-* Filter price & quantity > 0
-* Validasi format tanggal
-
-### 3️⃣ Transformation
-
-* Membuat kolom `total_amount = price × quantity`
-
-### 4️⃣ Aggregation
-
-* Total revenue per category
-* Top 5 Products (berdasarkan total quantity)
-* Average transaction value per customer
-
-### 5️⃣ Storage Optimization
-
-* Simpan ke format Parquet
-* Partitioning berdasarkan `category`
+Kemudian dilakukan agregasi untuk menghasilkan beberapa **Key Performance Indicators (KPI)**.
 
 ---
 
-## 📸 Screenshot Praktikum
+# 📊 KPI yang Dihasilkan
 
-Berikut dokumentasi hasil praktikum:
+Analytics Layer menghasilkan beberapa metrik bisnis penting:
 
-### 1️⃣ Eksekusi Spark dan Proses Cleaning Data
+### 1️⃣ Total Revenue
 
-![Spark](evidence/1.%20Eksekusi%20Spark%20dan%20Proses%20Cleaning%20Data.png)
+Menghitung total pendapatan dari seluruh transaksi.
+
+Output disimpan pada:
+
+```
+data/serving/total_revenue
+```
+
+---
+
+### 2️⃣ Top Products
+
+Menghitung produk dengan jumlah penjualan tertinggi.
+
+Output disimpan pada:
+
+```
+data/serving/top_products
+```
+
+---
+
+### 3️⃣ Revenue per Category
+
+Menghitung total pendapatan berdasarkan kategori produk.
+
+Output disimpan pada:
+
+```
+data/serving/category_revenue
+```
+
+---
+
+### 4️⃣ Average Transaction Value
+
+Menghitung rata-rata nilai transaksi per pelanggan.
+
+Output disimpan pada:
+
+```
+data/serving/avg_transaction
+```
+
+Dataset tersebut menjadi **Serving Layer** yang akan digunakan oleh tools Business Intelligence.
+
+---
+
+# 📊 Visualization Layer (Power BI)
+
+Dataset dari folder **data/serving** kemudian dihubungkan ke **Power BI Desktop** untuk membuat dashboard analitik.
+
+Visualisasi yang dibuat meliputi:
+
+* KPI Card → Total Revenue
+* Bar Chart → Top Products
+* Bar Chart → Revenue per Category
+
+Dashboard disusun dengan layout:
+
+```
+---------------------------------
+E-Commerce Sales Dashboard
+---------------------------------
+Total Revenue
+---------------------------------
+Top Product | Revenue per Category
+---------------------------------
+```
+
+Dashboard ini membantu **pengambil keputusan bisnis memahami performa penjualan secara cepat**.
+
+---
+
+# 📸 Screenshot Praktikum
+
+Berikut dokumentasi hasil praktikum.
+
+### 1️⃣ Analytics Layer Execution
+
+Menampilkan proses eksekusi:
+
+```
+python scripts/analytics_layer.py
+```
 
 Menampilkan:
 
-* Spark Version
-* Total Raw Records
-* Total Cleaned Records
-* Proses cleaning tanpa error
+* Total records
+* Total revenue
+* Top products
+* Revenue per category
 
 ---
 
-### 2️⃣ Hasil Agregasi dan Status Pipeline Berhasil
+### 2️⃣ Dataset Serving Layer
 
-![Aggregation](evidence/2.%20Hasil%20Agregasi%20dan%20Status%20Pipeline%20Berhasil.png)
+Screenshot folder:
 
-Menampilkan:
+```
+data/serving
+```
 
-* Top 5 Products
-* Category Revenue
-* Pesan: **PIPELINE COMPLETED SUCCESSFULLY**
-
----
-
-### 3️⃣ Perbandingan Ukuran CSV dan Parquet
-
-![Parquet](evidence/3.%20Perbandingan%20Ukuran%20CSV%20dan%20Parquet.png)
-
-Hasil pengujian:
-
-* CSV ≈ 6.2 MB
-* Parquet ≈ 2.3 MB
-
-Parquet terbukti lebih efisien secara storage.
+Menunjukkan dataset yang siap digunakan oleh Power BI.
 
 ---
 
-## 📄 Laporan Praktikum 2
+### 3️⃣ Dashboard Power BI
 
-📎 [230104040056_Husna Norgina_P2.pdf](evidence/230104040056_Husna%20Norgina_P2.pdf)
+Menampilkan dashboard:
 
----
+```
+E-Commerce Sales Dashboard
+```
 
-> Semua screenshot disimpan dalam folder:
-> 📂 `evidence/`
+Dashboard berisi:
 
----
-
-## 📊 Analisis Singkat
-
-* Pipeline berjalan tanpa error menggunakan Apache Spark.
-* Explicit schema meningkatkan konsistensi dan reliability.
-* Parquet (columnar storage) menghasilkan ukuran file lebih kecil dibanding CSV.
-* Partitioning memungkinkan Partition Pruning sehingga meningkatkan performa query.
-* Top 5 Products:
-
-  * Tablet (40.898 unit)
-  * Laptop (40.654 unit)
-  * Monitor (40.629 unit)
-  * Headphones (40.506 unit)
-  * Phone (40.314 unit)
-
-Pipeline ini tidak hanya berfungsi secara teknis, tetapi juga menghasilkan dataset siap analitik untuk pengambilan keputusan bisnis.
+* KPI Total Revenue
+* Top Products Chart
+* Revenue per Category Chart
 
 ---
 
-## ✅ Kesimpulan
+# 📄 Laporan Praktikum 3
 
-Praktikum 2 berhasil mengimplementasikan **Enterprise Batch Data Pipeline** berbasis Apache Spark dengan pendekatan **Medallion Architecture (Raw – Clean – Curated)**.
-
-Pipeline ini membuktikan bahwa:
-
-* Distributed computing meningkatkan performa pemrosesan data.
-* Parquet (columnar storage) lebih efisien dibanding CSV.
-* Partitioning strategy meningkatkan efisiensi query.
-* Data engineering mindset berfokus pada scalability, maintainability, dan production-readiness.
-
-Praktikum ini menjadi fondasi penting dalam memahami arsitektur Big Data modern dan membangun pipeline yang siap digunakan dalam lingkungan industri.
+📎 `230104040056_Husna Norgina_P3.pdf`
 
 ---
 
-📝 *Disusun oleh Husna Norgina (230104040056) — Praktikum 2 Teknologi Big Data* 
+# 📊 Insight Bisnis
+
+Dari dashboard yang dibuat dapat diperoleh insight seperti:
+
+* Total revenue perusahaan dari seluruh transaksi
+* Produk dengan penjualan tertinggi
+* Kategori produk dengan kontribusi revenue terbesar
+* Pola nilai transaksi pelanggan
+
+Insight ini membantu perusahaan dalam **mengoptimalkan strategi penjualan dan pengambilan keputusan bisnis**.
+
+---
+
+# ✅ Kesimpulan
+
+Praktikum 3 berhasil mengimplementasikan **Analytics Layer dan Visualization Layer dalam Big Data Architecture**.
+
+Melalui praktikum ini dapat dipahami bahwa:
+
+* Apache Spark digunakan untuk melakukan pemrosesan dan analisis data.
+* Analytics Layer menghasilkan dataset KPI yang siap digunakan untuk BI.
+* Power BI berfungsi sebagai **Visualization Layer** yang menampilkan insight bisnis dalam bentuk dashboard.
+* Data pipeline modern menghubungkan proses **Data Engineering → Business Intelligence**.
+
+Praktikum ini memberikan gambaran **end-to-end workflow Big Data dari data mentah hingga dashboard analitik**.
+
+---
+
+📝 *Disusun oleh Husna Norgina (230104040056) — Praktikum 3 Teknologi Big Data*
 
 ---
