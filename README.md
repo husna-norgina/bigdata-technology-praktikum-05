@@ -268,7 +268,7 @@ Dashboard menampilkan insight dan alert secara real-time.
 
 # 📄 Laporan Praktikum 5
 
-📎 [230104040056_Husna Norgina_P5.pdf](evidence/230104040056_Husna%20Norgina_P5.pdf)
+📎 [230104040056_Husna Norgina_TBG_P5.pdf](evidence/230104040056_Husna%20Norgina_TBG_P5.pdf)
 
 Isi laporan meliputi:
 
